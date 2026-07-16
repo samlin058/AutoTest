@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+	<page name="test.pageHome" desc="永诚主页">
+		<locator by="xpath" value="/html/body/header/div[2]/div[2]/ul/li[2]/a" desc="在线购买"></locator>
+		<locator by="xpath" value="/html/body/header/div[2]/div[2]/ul/li[2]/div/div/dl[1]/dt/a" desc="汽车保险"></locator>
+	</page>
+
+	<page name="test.vehicleMessageWrite" desc="车险投保页">
+		<locator by="xpath" value="//*[@id='startCity']" desc="行驶城市"></locator>
+		<locator by="xpath" value="//*[@id='city_listVhl']/li[2]" desc="上海"></locator>
+		<locator by="xpath" value="//*[@id='carNum']" desc="车辆号码"></locator>
+		<locator by="xpath" value="//*[@id='checkbox']" desc="尚未取得车牌"></locator>
+		<locator by="xpath" value="//*[@id='carName']" desc="车主姓名"></locator>
+		<locator by="xpath" value="//*[@id='tbox']" desc="立即报价"></locator>
+	</page>
+
+	<page name="test.vehicleInformationEntry" desc="信息录入">
+		<locator by="xpath" value="//*[@id='frmNo']" desc="车辆识别代码/车架号"></locator>
+		<locator by="xpath" value="//*[@id='engNo']" desc="发动机号"></locator>
+		<locator by="xpath" value="//*[@id='vehicleName']" desc="车辆型号"></locator>
+		<locator by="xpath" value="//*[@id='queryVehicle']/tbody/tr[2]/td[2]"
+			desc="东风LZ6470XQ16V多用途乘用车"></locator>
+		<locator by="xpath" value="//*[@id='certiCode']" desc="证件号码"></locator>
+		<locator by="xpath" value="//*[@id='ownerGender1']" desc="性别-男(选择框)"></locator>
+		<locator by="xpath" value="//*[@id='birthDate']" desc="出生日期"></locator>
+		<locator by="className" value="ui-datepicker-year" desc="年"></locator>
+		<locator by="className" value="ui-datepicker-month" desc="月"></locator>
+		<locator by="xpath" value="//*[@id='ui-datepicker-div']/table/tbody/tr[3]/td[4]/a" desc="日"></locator>
+		<locator by="xpath" value="//*[@id='receivePhone']" desc="联系人手机"></locator>
+		<locator by="xpath" value="//*[@id='me']" desc="E-MAIL"></locator>
+		<locator by="xpath" value="//*[@id='selectTaxpayerType']/dt" desc="纳税人证件类型"></locator>
+		<locator by="xpath" value="//*[@id='selectTaxpayerType']/dd/a[1]" desc="纳税人证件类型-身份证"></locator>
+		<locator by="xpath" value="//*[@id='taxpayerCode']" desc="纳税人证件号码"></locator>
+		<locator by="xpath" value="//*[@id='orderVehicleInfo']/div[4]/span/a" desc="获取报价"></locator>
+		<locator by="id" value="skipLogin" desc="跳过"></locator>
+	</page>
+	
+	
+</pages>

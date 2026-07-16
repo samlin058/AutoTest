@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page name="goblin.index" desc="Goblin主页">
+		<locator by="xpath" value="/html/body/div[2]/div/div[2]/div/div[2]/button/span" desc="催收禁止行为X按钮"></locator>
+		<locator by="xpath" value="//*[@id='webrtc-phone-call']/div[1]/div/div/div/div/span[2]" desc="电话条沟"></locator>
+		<locator by="xpath" value="/div/div/div/span" desc="签入成功弹框"></locator>
+		<locator by="xpath" value="//*[@id='root']/section/header/div/div[1]/ul/li[2]/div/span/span" desc="工作台"></locator>
+		<locator by="cssSelector" value="a[href='/goblin/workbench']" desc="待我处理"></locator>
+		<locator by="cssSelector" value="div[class='ant-select-selection__rendered']" desc="请选择催收机构"></locator>
+		<locator by="xpath" value="//*[@id='test-uuid']/ul/li" desc="玛仔汽车/玛瑙湾"></locator>
+		<locator by="xpath" value="//span[text()='请选择节点']" desc="请选择节点"></locator>
+		<locator by="cssSelector" value="span[class='ant-select-tree-checkbox-inner']" desc="玛仔汽车/玛瑙湾-节点"></locator>
+		<locator by="cssSelector" value="div[id='agentIds']" desc="催收员下拉框"></locator>
+		<locator by="xpath" value="//li[text()='鸾刀(luandao)']" desc="请选择催收员"></locator>
+		<locator by="cssSelector" value="button[class='ant-btn ant-btn-primary']" desc="查询"></locator>
+	</page>
+	
+	<page name="goblin.login" desc="Goblin登录页">
+		<locator by="xpath" value="//*[@id='username']" desc="登录用户名框"></locator>
+		<locator by="xpath" value="//*[@id='password']" desc="登录密码框"></locator>
+		<locator by="xpath" value="//*[@id='submit']" desc="登录按钮"></locator>
+	</page>
+	
+	<page name="chrome.set" desc="chrome设置权限页">
+		<locator by="xpath" value="//*[@id='label']" desc="1"></locator>
+		<locator by="xpath" value="//*[@id='maskedImage']" desc="2"></locator>
+		<locator by="xpath" value="//*[@id='collapseChild']/div/div[2]/div[1]" desc="3"></locator>
+		<locator by="xpath" value="//*[@id='permission']" desc="4"></locator>
+		<locator by="xpath" value="//*[@id='allow']" desc="5"></locator>
+	</page>
+</pages>
