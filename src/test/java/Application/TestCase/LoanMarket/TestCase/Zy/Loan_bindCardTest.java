@@ -1,15 +1,15 @@
 package Application.TestCase.LoanMarket.TestCase.Zy;
 
-import Data.BusinessLayer.LoanMarket.H5ProcessContext;
-import Data.BusinessLayer.LoanMarket.XYJH5Process;
-import Data.ApisLayer.LoanMarket.CardController;
-import Data.Ro.LoanMarket.CardControllerBindCardApplyRo;
-import Data.Ro.LoanMarket.CardControllerInitBindCardTaskRo;
-import Data.Ro.LoanMarket.CardControllerSupportListRo;
-import Data.Ro.LoanMarket.CardControllerVerifyCardRo;
+import Domain.Business.LoanMarket.H5ProcessContext;
+import Domain.Business.LoanMarket.XYJH5Process;
+import Domain.Apis.LoanMarket.CardController;
+import Domain.Ro.LoanMarket.CardControllerBindCardApplyRo;
+import Domain.Ro.LoanMarket.CardControllerInitBindCardTaskRo;
+import Domain.Ro.LoanMarket.CardControllerSupportListRo;
+import Domain.Ro.LoanMarket.CardControllerVerifyCardRo;
+import Service.ProjectEnum;
 import Service.ApiCore.BaseTestCase;
-import Service.ApiCore.ProjectEnum;
-import Service.Util.variable.BankCardHandler;
+import Service.Util.variable.BankCardGenerate;
 import Service.Util.Universal.JDBCHandler;
 import Service.Util.Universal.JsonHandler;
 import org.testng.Assert;
@@ -18,7 +18,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static Data.BusinessLayer.LoanMarket.XYJH5Process.H5processByPartner;
+import static Domain.Business.LoanMarket.XYJH5Process.H5processByPartner;
 
 
 /**
@@ -167,7 +167,7 @@ public class Loan_bindCardTest extends BaseTestCase {
     private static String generateSupportedCardNumber(H5ProcessContext context, String partnerCode) {
         String supportCardList = CARD_CONTROLLER.supportList(new CardControllerSupportListRo(partnerCode, context.getUid()));
         List<String> supportCardListStr = JsonHandler.readStringListByJsonPath("$.data.bankName", supportCardList);
-        return BankCardHandler.generate19DigitCardNumberInSupportedBanks(supportCardListStr);
+        return BankCardGenerate.generate19DigitCardNumberInSupportedBanks(supportCardListStr);
     }
 
     /**
@@ -176,7 +176,7 @@ public class Loan_bindCardTest extends BaseTestCase {
     private static String generateUnsupportedCardNumber(H5ProcessContext context, String partnerCode) {
         String supportCardList = CARD_CONTROLLER.supportList(new CardControllerSupportListRo(partnerCode, context.getUid()));
         List<String> supportCardListStr = JsonHandler.readStringListByJsonPath("$.data.bankName", supportCardList);
-        return BankCardHandler.generate19DigitCardNumberNotInSupportedBanks(supportCardListStr);
+        return BankCardGenerate.generate19DigitCardNumberNotInSupportedBanks(supportCardListStr);
     }
 
     /**

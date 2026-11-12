@@ -1,9 +1,9 @@
 package Application.TestCase.LoanMarket.TestCase.Open;
 
-import Data.BusinessLayer.LoanMarket.OpenApiScenario;
-import Data.ApisLayer.LoanMarket.Open;
-import Data.BusinessLayer.LoanMarket.QueryProtocol;
-import Data.Ro.LoanMarket.OpenAgreementServiceRo;
+import Domain.Business.LoanMarket.OpenApiScenario;
+import Domain.Apis.LoanMarket.Open;
+import Domain.Business.LoanMarket.QueryProtocol;
+import Domain.Ro.LoanMarket.OpenAgreementServiceRo;
 import Service.ApiCore.BaseTestCase;
 import Service.Util.Universal.JsonHandler;
 import org.testng.annotations.DataProvider;

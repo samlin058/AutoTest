@@ -1,6 +1,6 @@
 package Service.Pojo;
 
-import Service.Util.variable.GenerationHandler;
+import Service.Util.variable.IntGenerate;
 import lombok.Data;
 
 import java.util.List;
@@ -29,7 +29,7 @@ public class CreditLoan {
 
     public CreditLoan(String orderNo) {
         this.OrderNo = orderNo;
-        this.loanInfo = new LoanInfo(GenerationHandler.generateRandomInt(7, 12));
+        this.loanInfo = new LoanInfo(IntGenerate.generateRandomInt(7, 12));
         this.customerInfo = new CustomerInfo();
         this.emergencyContactsList= EmergencyContacts.getEmergencyContactsList();
         this.repaymentInfoList = RepaymentInfo.getRepaymentInfoList(loanInfo);

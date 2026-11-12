@@ -1,8 +1,9 @@
 
 package Service.Util.Universal;
 
-import Service.ApiCore.ProjectEnum;
 import org.apache.log4j.Logger;
+
+import Service.ProjectEnum;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;

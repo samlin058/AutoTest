@@ -1,28 +1,27 @@
-package util;
+package Service.UiCore.util;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import Service.UiCore.pojo.Locator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
-import pojo.Locator;
-
 /**
- * ¼ÓÔØUIÊı¾İÔØÌåxmlÎÄ¼ş³ÉÎªjavaÖĞµÄ¶ÔÏó
+ * åŠ è½½UIæ•°æ®è½½ä½“xmlæ–‡ä»¶æˆä¸ºjavaä¸­çš„å¯¹è±¡
  *  
  * @author       luandao
- * @Date         2020Äê9ÔÂ30ÈÕ 
+ * @Date         2020å¹´9æœˆ30æ—¥ 
  *
  */
 public class UILibraryUtil {
 
-	// ËùÓĞÒ³ÃæµÄÃèÊö
+	// æ‰€æœ‰é¡µé¢çš„æè¿°
 	public static HashMap<String, HashMap<String, Locator>> pagesMap = new HashMap<String, HashMap<String, Locator>>();
-	// ËùÓĞ¼ÓÔØµÄÅäÖÃÂ·¾¶
+	// æ‰€æœ‰åŠ è½½çš„é…ç½®è·¯å¾„
 	public static ArrayList<String> pathList = new ArrayList<String>();
 
 	static {
@@ -31,39 +30,39 @@ public class UILibraryUtil {
 		readMoreData(pathList);
 	}
 
-	// Êı¾İÔØÌåxml-->javaÖĞµÄ¶ÔÏó
+	// æ•°æ®è½½ä½“xml-->javaä¸­çš„å¯¹è±¡
 	private static HashMap<String, HashMap<String, Locator>> readUILibrary(String xmlPath) {
-		// µÃµ½¶ÁÈ¡Æ÷
+		// å¾—åˆ°è¯»å–å™¨
 		SAXReader reader = new SAXReader();
 		try {
-			// »ñµÃxmlÎÄµµ
+			// è·å¾—xmlæ–‡æ¡£
 			Document document = reader.read(UILibraryUtil.class.getResourceAsStream(xmlPath));
-			// »ñµÃ¸ùÔªËØ
+			// è·å¾—æ ¹å…ƒç´ 
 			Element rootElement = document.getRootElement();
-			// »ñµÃ¸ùÔªËØÏÂËùÓĞµÄpage×ÓÔªËØ
+			// è·å¾—æ ¹å…ƒç´ ä¸‹æ‰€æœ‰çš„pageå­å…ƒç´ 
 			@SuppressWarnings("unchecked")
 			List<Element> pageElements = rootElement.elements("page");
 
-			// ±éÀúÃ¿Ò»¸öÒ³Ãæ
+			// éå†æ¯ä¸€ä¸ªé¡µé¢
 			for (Element page : pageElements) {
-				// Ò³ÃæµÄÃû³Æ--¡·ÀàÃû
+				// é¡µé¢çš„åç§°--ã€‹ç±»å
 				// String pageName = page.attributeValue("name");
-				// Ò³ÃæµÄÃèÊö
+				// é¡µé¢çš„æè¿°
 				String pageDesc = page.attributeValue("desc");
-				// »ñµÃÃ¿¸öÒ³ÃæÏÂµÄËùÓĞÔªËØĞÅÏ¢
+				// è·å¾—æ¯ä¸ªé¡µé¢ä¸‹çš„æ‰€æœ‰å…ƒç´ ä¿¡æ¯
 				@SuppressWarnings("unchecked")
 				List<Element> locatorElements = page.elements("locator");
-				// ±£´æÃ¿¸öÒ³ÃæµÄlocatorµÄmap
+				// ä¿å­˜æ¯ä¸ªé¡µé¢çš„locatorçš„map
 				HashMap<String, Locator> locatorMap = new HashMap<String, Locator>();
-				// ±éÀúÃ¿Ò»¸öÔªËØ
+				// éå†æ¯ä¸€ä¸ªå…ƒç´ 
 				for (Element locatorElement : locatorElements) {
-					// ¶¨Î»µÄ·½Ê½
+					// å®šä½çš„æ–¹å¼
 					String by = locatorElement.attributeValue("by");
-					// ¶¨Î»µÄÖµ
+					// å®šä½çš„å€¼
 					String value = locatorElement.attributeValue("value");
-					// ÔªËØµÄÃèÊö
+					// å…ƒç´ çš„æè¿°
 					String desc = locatorElement.attributeValue("desc");
-					// ´´½¨locator
+					// åˆ›å»ºlocator
 					Locator locator = new Locator(by, value, desc);
 					locatorMap.put(desc, locator);
 				}
@@ -76,10 +75,10 @@ public class UILibraryUtil {
 	}
 
 	/**
-	 * ¶Á¸ü¶àµÄÅäÖÃ
+	 * è¯»æ›´å¤šçš„é…ç½®
 	 * 
 	 * @author luandao
-	 * @Date 2020Äê9ÔÂ3ÈÕ
+	 * @Date 2020å¹´9æœˆ3æ—¥
 	 *
 	 */
 	private static void readMoreData(ArrayList<String> xmlPath) {
@@ -89,24 +88,24 @@ public class UILibraryUtil {
 	}
 
 	/**
-	 *   Àı×Ó    
+	 *   ä¾‹å­    
 	 * @author  luandao
-	 * @Date    2020Äê9ÔÂ28ÈÕ 
+	 * @Date    2020å¹´9æœˆ28æ—¥ 
 	 *
 	 */
 	public static void main(String args[]) {
 		Set<String> set = pagesMap.keySet();
 		for (String key : set) {
-			System.out.println("key£º" + key);
+			System.out.println("keyï¼š" + key);
 			HashMap<String, Locator> locatorsMap = pagesMap.get(key);
 			Set<String> keys = locatorsMap.keySet();
 			int i = 1;
 			for (String string : keys) {
 				Locator locator2 = locatorsMap.get(string);
-				System.out.println("By£º" + locator2.getBy());
-				System.out.println("Desc£º" + locator2.getDesc());
-				System.out.println("Value£º" + locator2.getValue());
-				System.out.println("num£º" + i++);
+				System.out.println("Byï¼š" + locator2.getBy());
+				System.out.println("Descï¼š" + locator2.getDesc());
+				System.out.println("Valueï¼š" + locator2.getValue());
+				System.out.println("numï¼š" + i++);
 				System.out.println("---------------------------------------------");
 			}
 		}

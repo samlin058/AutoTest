@@ -1,6 +1,6 @@
 package Application.TestCase.LoanMarket.TestCase.Open;
 
-import Data.BusinessLayer.LoanMarket.OpenApiScenario;
+import Domain.Business.LoanMarket.OpenApiScenario;
 import org.testng.annotations.Test;
 
 public class OpenWithdrawTest {

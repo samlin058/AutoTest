@@ -1,10 +1,10 @@
 package Application.TestCase.Alchemist.TestCase;
 
 
-import Data.ApisLayer.Alchemist.FileController;
-import Data.Ro.Alchemist.FileControllerDownloadErrorRo;
-import Data.Ro.Alchemist.FileControllerDownloadFileRo;
-import Data.Ro.Alchemist.ImportLeadRo;
+import Domain.Apis.Alchemist.FileController;
+import Domain.Ro.Alchemist.FileControllerDownloadErrorRo;
+import Domain.Ro.Alchemist.FileControllerDownloadFileRo;
+import Domain.Ro.Alchemist.ImportLeadRo;
 import Service.ApiCore.BaseTestCase;
 import org.testng.annotations.Test;
 

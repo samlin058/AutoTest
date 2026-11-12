@@ -1,6 +1,6 @@
 package Service.Pojo;
 
-import Service.Util.variable.BankCardHandler;
+import Service.Util.variable.BankCardGenerate;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -18,8 +18,8 @@ public class BankCardInfo {
         BankCardInfo bankCardInfo =new BankCardInfo();
         bankCardInfo.setReservedPhoneNumber(customerInfo.getPhoneNumber());
         bankCardInfo.setBindingDate(loanInfo.getDisbursementDate());
-        bankCardInfo.setBankCardNumber(BankCardHandler.generate19DigitCardNumber());
-        bankCardInfo.setBankName(BankCardHandler.getBankNameFromCardNumber(bankCardInfo.getBankCardNumber()));
+        bankCardInfo.setBankCardNumber(BankCardGenerate.generate19DigitCardNumber());
+        bankCardInfo.setBankName(BankCardGenerate.getBankNameFromCardNumber(bankCardInfo.getBankCardNumber()));
         bankCardInfos.add(bankCardInfo);
         return bankCardInfos;
     }

@@ -1,10 +1,10 @@
 package Application.TestCase.LoanMarket.TestCase.Zy;
 
-import Data.ApisLayer.LoanMarket.UserController;
-import Data.Ro.LoanMarket.UserControllerLoginRo;
+import Domain.Apis.LoanMarket.UserController;
+import Domain.Ro.LoanMarket.UserControllerLoginRo;
 import Service.ApiCore.BaseTestCase;
 import Service.Util.Universal.JsonHandler;
-import Service.Util.variable.PhoneNumberGeneratorHandler;
+import Service.Util.variable.PhoneNumberGenerate;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -30,19 +30,19 @@ public class User_LoginTest extends BaseTestCase {
     public Object[][] loginDataProvider() {
         return new Object[][]{
                 // 正向用例：自营渠道+新手机号+正确验证码，注册成功
-                {PhoneNumberGeneratorHandler.findAvailablePhoneByProjectCode(), "luandaoTest", "888888", 0, "自营渠道新手机号注册成功"},
+                {PhoneNumberGenerate.findAvailablePhoneByProjectCode(), "luandaoTest", "888888", 0, "自营渠道新手机号注册成功"},
                 // 正向用例：非自营渠道+新手机号+正确验证码，注册成功
-                {PhoneNumberGeneratorHandler.findAvailablePhoneByProjectCode(), "KN-MC", "888888", 0, "非自营渠道新手机号注册成功"},
+                {PhoneNumberGenerate.findAvailablePhoneByProjectCode(), "KN-MC", "888888", 0, "非自营渠道新手机号注册成功"},
                 // 反向用例：未配置渠道+新手机号+正确验证码，注册失败
-                {PhoneNumberGeneratorHandler.findAvailablePhoneByProjectCode(), "NOT_EXIST", "888888", 1, "未配置渠道应注册失败"},
+                {PhoneNumberGenerate.findAvailablePhoneByProjectCode(), "NOT_EXIST", "888888", 1, "未配置渠道应注册失败"},
                 // 反向用例：手机号为空，注册失败
                 {"", "luandaoTest", "888888", 1, "手机号为空应注册失败"},
                 // 反向用例：验证码为空，注册失败
-                {PhoneNumberGeneratorHandler.findAvailablePhoneByProjectCode(), "luandaoTest", "", 1, "验证码为空应注册失败"},
+                {PhoneNumberGenerate.findAvailablePhoneByProjectCode(), "luandaoTest", "", 1, "验证码为空应注册失败"},
                 // 边界用例：手机号长度不足，注册失败
                 {"12345", "luandaoTest", "888888", 1, "手机号长度不足应注册失败"},
                 // 边界用例：验证码长度不足，注册失败
-                {PhoneNumberGeneratorHandler.findAvailablePhoneByProjectCode(), "luandaoTest", "12", 1, "验证码长度不足应注册失败"},
+                {PhoneNumberGenerate.findAvailablePhoneByProjectCode(), "luandaoTest", "12", 1, "验证码长度不足应注册失败"},
         };
     }
 
@@ -51,7 +51,7 @@ public class User_LoginTest extends BaseTestCase {
      */
     @Test(description = "自营注册后用同手机号在非自营注册，生成新用户id")
     public void testLogin_SelfThenNonSelf_NewUid() {
-        String phone = PhoneNumberGeneratorHandler.findAvailablePhoneByProjectCode();
+        String phone = PhoneNumberGenerate.findAvailablePhoneByProjectCode();
         String channelSelf = "luandaoTest";
         String channelNonSelf = "KN-MC";
         // 先自营注册

@@ -1,0 +1,21 @@
+package Domain.Ro.IndoArk;
+
+import Domain.Apis.IndoArk.CustomerNoteController;
+import Service.Annotations.AnnotationProcessor.DenpendencesProcessor;
+import Service.Annotations.AnnotationLibrary.Param;
+
+
+@lombok.Data
+public class CustomerNoteControllerGetCustomerNoteRo extends CustomerNoteController {
+
+    @Param
+    public String id;
+    @Param
+    public String noteId;
+
+   static {
+      DenpendencesProcessor.roDendenpence(CustomerNoteControllerGetCustomerNoteRo.class);
+   }
+}
+
+

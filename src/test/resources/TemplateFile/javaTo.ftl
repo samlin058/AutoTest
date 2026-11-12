@@ -1,9 +1,9 @@
 package Application.TestCase.${projectEnum}.ApiTest;
 
 
-import Data.ApisLayer.${projectEnum}.${controller};
+import Domain.Apis.${projectEnum}.${controller};
 <#list methods as method>
-<#if method.roName != "noRo">import Data.Ro.${projectEnum}.${method.roName};</#if>
+<#if method.roName != "noRo">import Domain.Ro.${projectEnum}.${method.roName};</#if>
 </#list>
 import Service.ApiCore.ApiBase;
 import Service.ApiCore.BaseTestCase;

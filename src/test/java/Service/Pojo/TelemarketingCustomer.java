@@ -1,8 +1,8 @@
 package Service.Pojo;
 
-import Service.Util.variable.ChinneNameHandler;
-import Service.Util.variable.GenerationHandler;
-import Service.Util.variable.PhoneNumberGeneratorHandler;
+import Service.Util.variable.ChinneNameGenerate;
+import Service.Util.variable.IntGenerate;
+import Service.Util.variable.PhoneNumberGenerate;
 import Service.Util.Universal.StringHandler;
 import lombok.Data;
 
@@ -34,12 +34,12 @@ public class TelemarketingCustomer {
     private String lendingPlatform;    // 借款平台
 
     public TelemarketingCustomer() {
-        this.UID = GenerationHandler.generateUniqueString();
+        this.UID = IntGenerate.generateUniqueString();
         this.LID = UID;
-        this.customerName = ChinneNameHandler.generateName();
-        this.phoneNumber = "8" + PhoneNumberGeneratorHandler.generatePhoneNumber();
-        this.email = GenerationHandler.generateRandomLong(10,10)+"@qq.com";
-        this.idCardNumber = String.valueOf(GenerationHandler.generateRandomLong(16, 16));
+        this.customerName = ChinneNameGenerate.generateName();
+        this.phoneNumber = "8" + PhoneNumberGenerate.generatePhoneNumber();
+        this.email = IntGenerate.generateRandomLong(10,10)+"@qq.com";
+        this.idCardNumber = String.valueOf(IntGenerate.generateRandomLong(16, 16));
         this.gender = "female";
         this.profession = "Banjarsari";
         this.city = "Kota Surakarta";
@@ -51,10 +51,10 @@ public class TelemarketingCustomer {
         this.companyAddress = "lorong 15 no 2, jl.ap.pettarani 2";
         this.companyPhone = "89666584561";
         this.birthDate = "1996/1/29";
-        this.loanAmount = GenerationHandler.generateRandomLong(2,4)*1000;
+        this.loanAmount = IntGenerate.generateRandomLong(2,4)*1000;
         this.overdueDays = "255";
         this.remainingPrincipal = loanAmount;
-        this.otherFees = GenerationHandler.generateRandomLong(2,4)*100;
+        this.otherFees = IntGenerate.generateRandomLong(2,4)*100;
         this.commissionAmount = String.valueOf(loanAmount + remainingPrincipal);
         this.lendingPlatform = "KTA Kilat";
     }

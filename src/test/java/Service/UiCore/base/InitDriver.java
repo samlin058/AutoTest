@@ -1,77 +1,177 @@
-package base;
+package Service.UiCore.base;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Parameters;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class InitDriver {
-	// import static org.testng.Assert.*; JDK-1.8µÄĞÂ¹¦ÄÜ£¬µ¼ÈëtestngËùÓĞµÄ¾²Ì¬·½·¨
 
 	private static Logger logger = Logger.getLogger(InitDriver.class);
-	
-	// È«²¿±äÁ¿£¬¶ÔÏóµÄÊôĞÔ
+
+	/** ä½äºæ­¤ä½“ç§¯çš„ chromedriver å¤šåŠæ˜¯æ—§ç‰ˆï¼ˆå¦‚ 85ï¼‰ï¼Œä¸å½“å‰ Chrome ä¸å…¼å®¹ */
+	private static final long MIN_USABLE_CHROMEDRIVER_BYTES = 15_000_000L;
+
 	public static WebDriver driver = null;
 
 	@BeforeSuite
-	@Parameters(value = { "browserType", "driverPath", "sleniumVersion" })
+	@Parameters(value = { "browserType", "driverPath", "sleniumVersion"})
 	public void beforeSuite(String browserType, String driverPath, String sleniumVersion) {
-		// ½«browserType×Ö·û´®×ª»¯³ÉĞ¡Ğ´
 		String browserTypeLowerCase = browserType.toLowerCase();
-		// Èç¹ûÊÇieä¯ÀÀÆ÷
 		if (("ie").equals(browserTypeLowerCase)) {
-			// 1:Çı¶¯ÎÄ¼şÕÒ²»µ½µÄÒì³£
 			System.setProperty("webdriver.ie.driver", driverPath);
-			// ´´½¨Ò»¸öÉèÖÃ¶ÔÏó£¬ÓÃÀ´ÉèÖÃ´´½¨ieÇı¶¯Ê±µÄ¸÷ÖÖÉèÖÃ
-			DesiredCapabilities capabilities = new DesiredCapabilities();
-			// 2.È¡ÏûieµÄ°²È«ÉèÖÃ
-			capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-			// 3.ºöÂÔä¯ÀÀÆ÷µÄÒ³ÃæËõ·ÅÉèÖÃ
-			capabilities.setCapability(InternetExplorerDriver.IGNORE_ZOOM_SETTING, true);
-			// 4.ÉèÖÃÒ»¸ö³õÊ¼»¯Ò³Ãæ£¬·ÀÖ¹windows¶ÔÏó¶ªÊ§
-			capabilities.setCapability(InternetExplorerDriver.INITIAL_BROWSER_URL, "http://www.baidu.com");
-			// 5.ÔÊĞíä¯ÀÀÆ÷ÔËĞĞjs½Å±¾
-			capabilities.setJavascriptEnabled(true);
-			driver = new InternetExplorerDriver(capabilities);
-			logger.info("´´½¨ieÓÎÀÀÆ÷Çı¶¯Íê±Ï");
+			InternetExplorerOptions options = new InternetExplorerOptions();
+			options.introduceFlakinessByIgnoringSecurityDomains();
+			options.ignoreZoomSettings();
+			options.withInitialBrowserUrl("http://www.baidu.com");
+			driver = new InternetExplorerDriver(options);
+			logger.info("åˆ›å»ºieæ¸¸è§ˆå™¨é©±åŠ¨å®Œæ¯•");
 
 		} else if (("chrome").equals(browserTypeLowerCase)) {
-			DesiredCapabilities capabilities = new DesiredCapabilities();
-			// ÉèÖÃ¹È¸èÇı¶¯ÉèÖÃ
-			System.setProperty("webdriver.chrome.driver", driverPath);
-			// 5.ÔÊĞíä¯ÀÀÆ÷ÔËĞĞjs½Å±¾
-			driver = new ChromeDriver(capabilities);
-			logger.info("´´½¨¹È¸èÇı¶¯Íê±Ï");
+			ChromeOptions options = new ChromeOptions();
+			String resolved = resolveChromeDriverPath(driverPath);
+			if (resolved != null) {
+				System.setProperty("webdriver.chrome.driver", resolved);
+				ChromeDriverService service = new ChromeDriverService.Builder()
+						.usingDriverExecutable(new File(resolved))
+						.build();
+				driver = new ChromeDriver(service, options);
+				logger.info("åˆ›å»ºè°·æ­Œé©±åŠ¨å®Œæ¯•ï¼Œä½¿ç”¨: " + resolved);
+			} else {
+				// æ— æœ¬åœ°å¯ç”¨é©±åŠ¨æ—¶æ‰èµ° Selenium Managerï¼ˆå¯èƒ½å› ç½‘ç»œå¡ä½ï¼‰
+				System.clearProperty("webdriver.chrome.driver");
+				logger.info("ä½¿ç”¨ Selenium Manager è‡ªåŠ¨åŒ¹é… ChromeDriverï¼ˆä¸æœ¬æœº Chrome ç‰ˆæœ¬å¯¹é½ï¼‰");
+				driver = new ChromeDriver(options);
+				logger.info("åˆ›å»ºè°·æ­Œé©±åŠ¨å®Œæ¯•");
+			}
 
 		} else if (("firefox").equals(browserTypeLowerCase)) {
-			DesiredCapabilities capabilities = new DesiredCapabilities();
-			capabilities.setJavascriptEnabled(true);
-			// ÉèÖÃ»ğºüÇı¶¯×¼±¸
-			System.setProperty("webdriver.firefox.bin", "D:\\firefox\\firefox.exe");
-			// ÅĞ¶ÏseleniumµÄ°æ±¾ÊÇ·ñĞèÒªÇı¶¯
-			if (("3.x").equals(sleniumVersion)) {
+			FirefoxOptions options = new FirefoxOptions();
+			File firefoxBin = new File("D:\\firefox\\firefox.exe");
+			if (firefoxBin.isFile()) {
+				options.setBinary(firefoxBin.getAbsolutePath());
+			}
+			if (("3.x").equals(sleniumVersion) || isManualDriverPath(driverPath)) {
 				System.setProperty("webdriver.gecko.driver", driverPath);
 			}
-			// ´´½¨Ò»¸ö»ğºüµÄdriver
-			driver = new FirefoxDriver(capabilities);
-			logger.info("´´½¨»ğºüÇı¶¯Íê±Ï");
+			driver = new FirefoxDriver(options);
+			logger.info("åˆ›å»ºç«ç‹é©±åŠ¨å®Œæ¯•");
 		}
 	}
 
 	/**
-	 * ²âÊÔÍê±Ï£¬¹Ø±Õä¯ÀÀÆ÷
-	 * 
+	 * è§£æ ChromeDriver è·¯å¾„ï¼Œä¼˜å…ˆæœ¬åœ°ä»¥å… Selenium Manager è”ç½‘å¡ä½ã€‚
+	 * é¡ºåºï¼šWD_CHROME_DRIVER â†’ TestNG driverPathï¼ˆä¸”éè¿‡æ—§ï¼‰â†’ ~/.cache/selenium ç¼“å­˜ â†’ null(èµ° SM)
+	 */
+	private static String resolveChromeDriverPath(String driverPath) {
+		String envDriver = System.getenv("WD_CHROME_DRIVER");
+		if (isUsableChromeDriverFile(envDriver)) {
+			logger.info("ä½¿ç”¨ç¯å¢ƒå˜é‡ WD_CHROME_DRIVER: " + envDriver);
+			return envDriver.trim();
+		}
+
+		if (isManualDriverPath(driverPath)) {
+			File configured = new File(driverPath.trim());
+			if (isLikelyObsoleteChromeDriver(configured)) {
+				logger.warn("TestNG driverPath ç–‘ä¼¼è¿‡æ—§ï¼ˆä½“ç§¯è¿‡å°ï¼‰ï¼Œè·³è¿‡: " + configured.getAbsolutePath());
+			} else {
+				logger.info("ä½¿ç”¨ TestNG driverPath: " + configured.getAbsolutePath());
+				return configured.getAbsolutePath();
+			}
+		}
+
+		String cached = findCachedChromeDriver();
+		if (cached != null) {
+			logger.info("ä½¿ç”¨ Selenium æœ¬åœ°ç¼“å­˜ ChromeDriver: " + cached);
+			return cached;
+		}
+		return null;
+	}
+
+	/**
+	 * driverPath ä¸º auto / ç©º / éæ–‡ä»¶æ—¶èµ° Selenium Managerï¼›å¦åˆ™ä½¿ç”¨æœ¬åœ°é©±åŠ¨ã€‚
+	 */
+	private static boolean isManualDriverPath(String driverPath) {
+		if (driverPath == null) {
+			return false;
+		}
+		String path = driverPath.trim();
+		if (path.isEmpty() || "auto".equalsIgnoreCase(path)) {
+			return false;
+		}
+		return new File(path).isFile();
+	}
+
+	private static boolean isUsableChromeDriverFile(String path) {
+		if (path == null || path.trim().isEmpty()) {
+			return false;
+		}
+		File file = new File(path.trim());
+		return file.isFile() && !isLikelyObsoleteChromeDriver(file);
+	}
+
+	private static boolean isLikelyObsoleteChromeDriver(File file) {
+		return file.length() < MIN_USABLE_CHROMEDRIVER_BYTES;
+	}
+
+	/**
+	 * æŸ¥æ‰¾ ~/.cache/selenium/chromedriver ä¸‹æœ€æ–°çš„æœ¬åœ°ç¼“å­˜é©±åŠ¨ï¼Œé¿å…è”ç½‘ä¸‹è½½å¡ä½ã€‚
+	 */
+	private static String findCachedChromeDriver() {
+		File cacheRoot = new File(System.getProperty("user.home"), ".cache/selenium/chromedriver");
+		if (!cacheRoot.isDirectory()) {
+			return null;
+		}
+		File[] platformDirs = cacheRoot.listFiles(File::isDirectory);
+		if (platformDirs == null) {
+			return null;
+		}
+		File best = null;
+		for (File platformDir : platformDirs) {
+			File[] versionDirs = platformDir.listFiles(File::isDirectory);
+			if (versionDirs == null || versionDirs.length == 0) {
+				continue;
+			}
+			Arrays.sort(versionDirs, Comparator.comparing(File::getName).reversed());
+			for (File versionDir : versionDirs) {
+				File driverFile = new File(versionDir, "chromedriver.exe");
+				if (!driverFile.isFile()) {
+					driverFile = new File(versionDir, "chromedriver");
+				}
+				if (driverFile.isFile() && !isLikelyObsoleteChromeDriver(driverFile)) {
+					if (best == null || versionDir.getName().compareTo(best.getParentFile().getName()) > 0) {
+						best = driverFile;
+					}
+					break;
+				}
+			}
+		}
+		return best == null ? null : best.getAbsolutePath();
+	}
+
+	/**
+	 * æµ‹è¯•å®Œæ¯•ï¼Œå…³é—­æµè§ˆå™¨
+	 *
 	 * @throws InterruptedException
 	 */
 	@AfterSuite
 	public void afterClass() throws InterruptedException {
-		logger.info("²âÊÔÍê±Ï£¬¹Ø±Õä¯ÀÀÆ÷");
-		driver.quit();
+		logger.info("æµ‹è¯•å®Œæ¯•ï¼Œå…³é—­æµè§ˆå™¨");
+		if (driver != null) {
+			driver.quit();
+		}
 	}
 
 }

@@ -1,31 +1,28 @@
-package util;
+package Service.UiCore.util;
+
+import Service.UiCore.base.InitDriver;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-
-import base.InitDriver;
-
 public class ScreenShotUitl {
     
 	private static Logger logger = Logger.getLogger(ScreenShotUitl.class);
     
 	/**
-	 * ½ØÍ¼²Ù×÷
-	 * @param    screenShotDir   ½ØÍ¼Ä¿Â¼
-	 * @return   File            ½ØÍ¼ÎÄ¼ş
+	 * æˆªå›¾æ“ä½œ
+	 * @param    screenShotDir   æˆªå›¾ç›®å½•
+	 * @return   File            æˆªå›¾æ–‡ä»¶
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ30ÈÕ 
+	 * @Date         2020å¹´9æœˆ30æ—¥ 
 	 *
 	 */
 	public static File takeScreenshot(String screenShotDir) {
@@ -33,36 +30,28 @@ public class ScreenShotUitl {
 		WebDriver driver = InitDriver.driver;
 		File sourceFile = null;
 		
-		// ÎÄ¼şÃû
+		// æ–‡ä»¶å
 		Date now = new Date();
 		String fileName = now.getTime() + ".jpg";
 		LocalDate localDate1 = LocalDate.now();
 		String data = localDate1.toString();
 		
-		// Ä¿±êÎÄ¼ş
+		// ç›®æ ‡æ–‡ä»¶
 		File destFile = new File(screenShotDir + File.separator + data + File.separator + fileName);
 		
-		//ÅĞ¶ÏÓÃÄÄ¸öÊµÀı½ØÍ¼
-		if (driver instanceof InternetExplorerDriver) {
-			InternetExplorerDriver ieDriver = (InternetExplorerDriver) driver;
-			logger.info("ie¿ªÊ¼½øĞĞ½ØÍ¼");
-			sourceFile = ieDriver.getScreenshotAs(OutputType.FILE);
-		} else if (driver instanceof FirefoxDriver) {
-			FirefoxDriver firefoxDriver = (FirefoxDriver) driver;
-			logger.info("firefox¿ªÊ¼½øĞĞ½ØÍ¼");
-			sourceFile = firefoxDriver.getScreenshotAs(OutputType.FILE);
-		} else if (driver instanceof ChromeDriver) {
-			ChromeDriver chromeDriver = (ChromeDriver) driver;
-			logger.info("chrome¿ªÊ¼½øĞĞ½ØÍ¼");
-			sourceFile = chromeDriver.getScreenshotAs(OutputType.FILE);
+		if (driver instanceof TakesScreenshot) {
+			logger.info("å¼€å§‹è¿›è¡Œæˆªå›¾");
+			sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		} else {
+			logger.error("å½“å‰é©±åŠ¨ä¸æ”¯æŒæˆªå›¾");
+			return destFile;
 		}
 		
 		try {
-			logger.info("¿½±´½ØÍ¼ÎÄ¼şÖÁsurefireÄ¿±êÏÂ");
-			// ¿½±´µ½screenShotDir
+			logger.info("æ‹·è´æˆªå›¾æ–‡ä»¶è‡³surefireç›®æ ‡ä¸‹");
 			FileUtils.copyFile(sourceFile, destFile);
 		} catch (IOException e) {
-			logger.error("½ØÍ¼Ê§°Ü£¬Ã»ÓĞ¶ÔÓ¦µÄÇı¶¯");
+			logger.error("æˆªå›¾å¤±è´¥ï¼Œæ²¡æœ‰å¯¹åº”çš„é©±åŠ¨");
 			e.printStackTrace();
 		}
 		return destFile;

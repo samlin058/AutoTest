@@ -1,4 +1,4 @@
-package base;
+package Service.UiCore.base;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
@@ -7,9 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 
 /**
  * 
- * @Description  ¶ÔÒ³ÃæÔªËØ½øĞĞ²Ù×÷ 
+ * @Description  å¯¹é¡µé¢å…ƒç´ è¿›è¡Œæ“ä½œ 
  * @author       luandao
- * @Date         2020Äê9ÔÂ28ÈÕ 
+ * @Date         2020å¹´9æœˆ28æ—¥ 
  *
  */
 public class OperateOnElements extends FindEle {
@@ -17,66 +17,66 @@ public class OperateOnElements extends FindEle {
 	private static Logger logger = Logger.getLogger(OperateOnElements.class);
 	
 	/**
-	 * µã»÷ÔªËØ
+	 * ç‚¹å‡»å…ƒç´ 
 	 * 
-	 * @param element  Òªµã»÷µÄÔªËØ
+	 * @param element  è¦ç‚¹å‡»çš„å…ƒç´ 
 	 */
 	public void click(WebElement element) {
 		element.click();
 	}
 
 	/**
-	 *  µã»÷ÔªËØ
-	 * @param pageKeyword           Ò³Ãæ¹Ø¼ü×Ö
-	 * @param eleKeyword            ÔªËØ¹Ø¼ü×Ö
+	 *  ç‚¹å‡»å…ƒç´ 
+	 * @param pageKeyword           é¡µé¢å…³é”®å­—
+	 * @param eleKeyword            å…ƒç´ å…³é”®å­—
 	 * @throws InterruptedException void
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public void click(String pageKeyword, String eleKeyword) {
 		String clickBeforePageSource = driver.getPageSource();
 		WebElement element = getElementClickable(pageKeyword, eleKeyword);
-		logger.info("µã»÷ÔªËØ£º" + eleKeyword);
+		logger.info("ç‚¹å‡»å…ƒç´ ï¼š" + eleKeyword);
 		click(element);
 		String clickAfterPageSource = driver.getPageSource();
 		if (clickBeforePageSource.equals(clickAfterPageSource)) {
-			logger.info("ÔÙµãÒ»´Î");
+			logger.info("å†ç‚¹ä¸€æ¬¡");
 			click(element);
 		}
 	}
 
 	/**
-	 * ÊäÈëÄÚÈİ£¨½øÒ»²½·â×°£©
+	 * è¾“å…¥å†…å®¹ï¼ˆè¿›ä¸€æ­¥å°è£…ï¼‰
 	 * 
-	 * @param keyword      ÒªÊäÈëÄÚÈİµÄÔªËØÖµ
-	 * @param value        ÊäÈëµÄÄÚÈİ
+	 * @param  pageKeyword     è¦è¾“å…¥å†…å®¹çš„å…ƒç´ å€¼
+	 * @param value        è¾“å…¥çš„å†…å®¹
 	 *            
 	 */
 	public void fillIn(String pageKeyword, String eleKeyword, String value) {
 		WebElement element = getElement(pageKeyword, eleKeyword);
-		logger.info("Íù¡¾" + eleKeyword + "¡¿ÊäÈëÄÚÈİ£º" + value);
+		logger.info("å¾€ã€" + eleKeyword + "ã€‘è¾“å…¥å†…å®¹ï¼š" + value);
 		element.sendKeys(value);
 	}
 
 	/**
-	 * µÃµ½ÔªËØµÄÎÄ±¾ÄÚÈİ
+	 * å¾—åˆ°å…ƒç´ çš„æ–‡æœ¬å†…å®¹
 	 * 
-	 * @param pageKeyword      Ò³Ãæ¹Ø¼ü×Ö
-	 * @param eleKeyword       ÔªËØ¹Ø¼ü×Ö
-	 * @return String        ÔªËØµÄÎÄ±¾ÄÚÈİ
+	 * @param pageKeyword      é¡µé¢å…³é”®å­—
+	 * @param eleKeyword       å…ƒç´ å…³é”®å­—
+	 * @return String        å…ƒç´ çš„æ–‡æœ¬å†…å®¹
 	 */
 	public String getText(String pageKeyword, String eleKeyword) {
 		return getElement(pageKeyword, eleKeyword).getText();
 	}
 
 	/**
-	 * ¾Û½¹µ½ÔªËØÉÏ
+	 * èšç„¦åˆ°å…ƒç´ ä¸Š
 	 * 
 	 * @author luandao
 	 * @throws InterruptedException 
-	 * @Date 2020Äê9ÔÂ7ÈÕ
+	 * @Date 2020å¹´9æœˆ7æ—¥
 	 *
 	 */
 	public void moveToElement(String pageKey, String eleKey) throws InterruptedException {
@@ -87,11 +87,11 @@ public class OperateOnElements extends FindEle {
 
 	/**
 	 * 
-	 * @param pageKey  Ò³Ãæ¹Ø¼ü×Ö
-	 * @param eleKey   ÔªËØ¹Ø¼ü×Ö
-	 * @param value    Öµ
+	 * @param pageKey  é¡µé¢å…³é”®å­—
+	 * @param eleKey   å…ƒç´ å…³é”®å­—
+	 * @param value    å€¼
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ28ÈÕ 
+	 * @Date         2020å¹´9æœˆ28æ—¥ 
 	 *
 	 */
 	public void selectByValue(String pageKey, String eleKey, String value) {

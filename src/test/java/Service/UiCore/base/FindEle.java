@@ -1,10 +1,7 @@
-package base;
+package Service.UiCore.base;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.List;
-
+import Service.UiCore.pojo.Locator;
+import Service.UiCore.util.UILibraryUtil;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,54 +10,57 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pojo.Locator;
-import util.UILibraryUtil;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.time.Duration;
+import java.util.HashMap;
+import java.util.List;
 
 public class FindEle extends InitDriver {
 
 	/**
-	 * Ò»¸öÒ³ÃæÔªËØ¿ÉÒÔµã»÷µÄ±ØÒªÌõ¼ş 
-	 * 1:Ò³ÃæÉÏÒªÓĞÕâ¸öÔªËØ--¡·domÊ÷´æÔÚ¸Ã±êÇ©
-	 * 2:ÔªËØÒ»¶¨ÊÇÒªÏÔÊ¾³öÀ´µÄ
-	 * 3:ÔªËØÒ»¶¨ÒªÊÇ¼¤»î×´Ì¬£¬disable
+	 * ä¸€ä¸ªé¡µé¢å…ƒç´ å¯ä»¥ç‚¹å‡»çš„å¿…è¦æ¡ä»¶ 
+	 * 1:é¡µé¢ä¸Šè¦æœ‰è¿™ä¸ªå…ƒç´ --ã€‹domæ ‘å­˜åœ¨è¯¥æ ‡ç­¾
+	 * 2:å…ƒç´ ä¸€å®šæ˜¯è¦æ˜¾ç¤ºå‡ºæ¥çš„
+	 * 3:å…ƒç´ ä¸€å®šè¦æ˜¯æ¿€æ´»çŠ¶æ€ï¼Œdisable
 	 * 
 	 */
 
 	private static Logger logger = Logger.getLogger(FindEle.class);
 
 	/**
-	 * ¸ù¾İ2¸ö¹Ø¼ü×Ö¶¨Î»Ò³ÃæÔªËØ
+	 * æ ¹æ®2ä¸ªå…³é”®å­—å®šä½é¡µé¢å…ƒç´ 
 	 * 
-	 * @param pageKeyword    Ò³Ãæ¹Ø¼ü×Ö
-	 * @param eleKeyword     ÔªËØ¹Ø¼ü×Ö
+	 * @param pageKeyword    é¡µé¢å…³é”®å­—
+	 * @param eleKeyword     å…ƒç´ å…³é”®å­—
 	 * 
-	 * @return    Ò³ÃæÔªËØ
+	 * @return    é¡µé¢å…ƒç´ 
 	 */
 	public WebElement getElement(String pageKeyword, String eleKeyword) {
-		// ËùÓĞÒ³ÃæµÄÒ³ÃæÃèÊö
+		// æ‰€æœ‰é¡µé¢çš„é¡µé¢æè¿°
 		HashMap<String, Locator> page = UILibraryUtil.pagesMap.get(pageKeyword);
-		// µ±Ç°ÒªÕÒµÄÔªËØµÄ¶¨Î»ĞÅÏ¢
+		// å½“å‰è¦æ‰¾çš„å…ƒç´ çš„å®šä½ä¿¡æ¯
 		Locator locator = page.get(eleKeyword);
-		// »ñÈ¡Ò³ÃæÔªËØ
+		// è·å–é¡µé¢å…ƒç´ 
 		String byStr = locator.getBy();
 		String value = locator.getValue();
-		// Êä³öÈÕÖ¾
-		logger.info("ÒÔ" + byStr + "·½Ê½" + "¿ªÊ¼²éÕÒ¡¾" + pageKeyword + "¡¿µÄ¡¾" + eleKeyword + "¡¿ÔªËØ");
-		// ÖÇÄÜµÈ´ı30s
-		WebDriverWait wait = new WebDriverWait(driver, 15);
-		// ÎÒÃÇµÄÆÚÍûÌõ¼ş
+		// è¾“å‡ºæ—¥å¿—
+		logger.info("ä»¥" + byStr + "æ–¹å¼" + "å¼€å§‹æŸ¥æ‰¾ã€" + pageKeyword + "ã€‘çš„ã€" + eleKeyword + "ã€‘å…ƒç´ ");
+		// æ™ºèƒ½ç­‰å¾…30s
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		// æˆ‘ä»¬çš„æœŸæœ›æ¡ä»¶
 		WebElement element = wait.until(new ExpectedCondition<WebElement>() {
 
 			public WebElement apply(WebDriver driver) {
 				Class<By> clazz = By.class;
 				try {
-					// »ñµÃ·½·¨£ºbyÖĞµÄÄ³¸ö¾²Ì¬·½·¨Èçid·½·¨¡¢name·½·¨
+					// è·å¾—æ–¹æ³•ï¼šbyä¸­çš„æŸä¸ªé™æ€æ–¹æ³•å¦‚idæ–¹æ³•ã€nameæ–¹æ³•
 					Method method = clazz.getMethod(byStr, String.class);
-					// invokeµÃµ½µÄ¶ÔÏóÇ¿×ª³ÉÒ»¸öBy¶ÔÏó
+					// invokeå¾—åˆ°çš„å¯¹è±¡å¼ºè½¬æˆä¸€ä¸ªByå¯¹è±¡
 					By by = (By) method.invoke(null, value);
 					return driver.findElement(by);
 				} catch (Exception e) {
-					logger.info("ÕÒ²»µ½¶ÔÓ¦·½·¨£¬Çë¼ì²éÄãµÄxmlÅäÖÃ");
+					logger.info("æ‰¾ä¸åˆ°å¯¹åº”æ–¹æ³•ï¼Œè¯·æ£€æŸ¥ä½ çš„xmlé…ç½®");
 					e.printStackTrace();
 				}
 				return null;
@@ -70,37 +70,37 @@ public class FindEle extends InitDriver {
 	}
 
 	/**
-	 * ¸ù¾İ2¸ö¹Ø¼ü×Ö²éÕÒÔªËØÁĞ±í
-	 * @param pageKeyword        Ò³Ãæ¹Ø¼ü×Ö
-	 * @param eleKeyword         ÔªËØ¹Ø¼ü×Ö
-	 * @return List<WebElement>  ÔªËØ¶ÔÏó¼¯ºÏ 
+	 * æ ¹æ®2ä¸ªå…³é”®å­—æŸ¥æ‰¾å…ƒç´ åˆ—è¡¨
+	 * @param pageKeyword        é¡µé¢å…³é”®å­—
+	 * @param eleKeyword         å…ƒç´ å…³é”®å­—
+	 * @return List<WebElement>  å…ƒç´ å¯¹è±¡é›†åˆ 
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ28ÈÕ 
+	 * @Date         2020å¹´9æœˆ28æ—¥ 
 	 *
 	 */
 	public List<WebElement> getElements(String pageKeyword, String eleKeyword) {
-		// ËùÓĞÒ³ÃæµÄÒ³ÃæÃèÊö
+		// æ‰€æœ‰é¡µé¢çš„é¡µé¢æè¿°
 		HashMap<String, Locator> page = UILibraryUtil.pagesMap.get(pageKeyword);
-		// µ±Ç°ÒªÕÒµÄÔªËØµÄ¶¨Î»ĞÅÏ¢
+		// å½“å‰è¦æ‰¾çš„å…ƒç´ çš„å®šä½ä¿¡æ¯
 		Locator locator = page.get(eleKeyword);
-		// »ñÈ¡Ò³ÃæÔªËØ
+		// è·å–é¡µé¢å…ƒç´ 
 		String byStr = locator.getBy();
 		String value = locator.getValue();
-		logger.info("ÒÔ" + byStr + "·½Ê½" + "¿ªÊ¼²éÕÒ" + eleKeyword + "ÔªËØÁĞ±í");
-		WebDriverWait wait = new WebDriverWait(driver, 15);
-		// ÎÒÃÇµÄÆÚÍûÌõ¼ş
+		logger.info("ä»¥" + byStr + "æ–¹å¼" + "å¼€å§‹æŸ¥æ‰¾" + eleKeyword + "å…ƒç´ åˆ—è¡¨");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+		// æˆ‘ä»¬çš„æœŸæœ›æ¡ä»¶
 		List<WebElement> elements = wait.until(new ExpectedCondition<List<WebElement>>() {
 			public List<WebElement> apply(WebDriver driver) {
 				Class<By> clazz = By.class;
 				try {
-					// »ñµÃ·½·¨£ºbyÖĞµÄÄ³¸ö¾²Ì¬·½·¨Èçid·½·¨¡¢name·½·¨
+					// è·å¾—æ–¹æ³•ï¼šbyä¸­çš„æŸä¸ªé™æ€æ–¹æ³•å¦‚idæ–¹æ³•ã€nameæ–¹æ³•
 					Method method = clazz.getMethod(byStr, String.class);
-					// invokeµÃµ½µÄ¶ÔÏóÇ¿×ª³ÉÒ»¸öBy¶ÔÏó
+					// invokeå¾—åˆ°çš„å¯¹è±¡å¼ºè½¬æˆä¸€ä¸ªByå¯¹è±¡
 					By by = (By) method.invoke(null, value);
 					return driver.findElements(by);
 				} catch (NoSuchMethodException e) {
-					logger.info("ÕÒ²»µ½¶ÔÓ¦·½·¨£¬Çë¼ì²éÄãµÄxmlÅäÖÃ");
+					logger.info("æ‰¾ä¸åˆ°å¯¹åº”æ–¹æ³•ï¼Œè¯·æ£€æŸ¥ä½ çš„xmlé…ç½®");
 					e.printStackTrace();
 				} catch (SecurityException e) {
 					e.printStackTrace();
@@ -118,13 +118,13 @@ public class FindEle extends InitDriver {
 	}
 
 	/**
-	 * ¸ù¾İ¹Ø¼ü×ÖºÍË÷ÒıÕÒµ½¶ÔÓ¦ÔªËØ
+	 * æ ¹æ®å…³é”®å­—å’Œç´¢å¼•æ‰¾åˆ°å¯¹åº”å…ƒç´ 
 	 * 
-	 * @param pageKeyword   Ò³Ãæ¹Ø¼ü×Ö
-	 * @param eleKeyword    ÔªËØ¹Ø¼ü×Ö
-	 * @param index         Ë÷Òı
+	 * @param pageKeyword   é¡µé¢å…³é”®å­—
+	 * @param eleKeyword    å…ƒç´ å…³é”®å­—
+	 * @param index         ç´¢å¼•
 	 * 
-	 * @return   ÔªËØ¶ÔÏó
+	 * @return   å…ƒç´ å¯¹è±¡
 	 */
 	public WebElement getEleByIndex(String pageKeyword, String eleKeyword, int index) {
 		List<WebElement> elementList = getElements(pageKeyword, eleKeyword);
@@ -133,35 +133,35 @@ public class FindEle extends InitDriver {
 	}
 
 	/**
-	 * ÕÒµ½ÔªËØ£¬²¢ÇÒ¸ÃÔªËØ¿É±»µã»÷
+	 * æ‰¾åˆ°å…ƒç´ ï¼Œå¹¶ä¸”è¯¥å…ƒç´ å¯è¢«ç‚¹å‡»
 	 * @param     pageKeyword
 	 * @param     eleKeyword
 	 * @return    WebElement
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public WebElement getElementClickable(String pageKeyword, String eleKeyword) {
-		// ËùÓĞÒ³ÃæµÄÒ³ÃæÃèÊö
+		// æ‰€æœ‰é¡µé¢çš„é¡µé¢æè¿°
 		HashMap<String, Locator> page = UILibraryUtil.pagesMap.get(pageKeyword);
-		// µ±Ç°ÒªÕÒµÄÔªËØµÄ¶¨Î»ĞÅÏ¢
+		// å½“å‰è¦æ‰¾çš„å…ƒç´ çš„å®šä½ä¿¡æ¯
 		Locator locator = page.get(eleKeyword);
-		// »ñÈ¡Ò³ÃæÔªËØ
+		// è·å–é¡µé¢å…ƒç´ 
 		String byStr = locator.getBy();
 		String value = locator.getValue();
-		logger.info("ÒÔ" + byStr + "·½Ê½" + "¿ªÊ¼²éÕÒ¡¾" + pageKeyword + "¡¿µÄ¡¾" + eleKeyword + "¡¿ÔªËØ");
+		logger.info("ä»¥" + byStr + "æ–¹å¼" + "å¼€å§‹æŸ¥æ‰¾ã€" + pageKeyword + "ã€‘çš„ã€" + eleKeyword + "ã€‘å…ƒç´ ");
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 15);
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 			Class<By> clazz = By.class;
-			// »ñµÃ·½·¨£ºbyÖĞµÄÄ³¸ö¾²Ì¬·½·¨Èçid·½·¨¡¢name·½·¨
+			// è·å¾—æ–¹æ³•ï¼šbyä¸­çš„æŸä¸ªé™æ€æ–¹æ³•å¦‚idæ–¹æ³•ã€nameæ–¹æ³•
 			Method method = clazz.getMethod(byStr, String.class);
-			// invokeµÃµ½µÄ¶ÔÏóÇ¿×ª³ÉÒ»¸öBy¶ÔÏó
+			// invokeå¾—åˆ°çš„å¯¹è±¡å¼ºè½¬æˆä¸€ä¸ªByå¯¹è±¡
 			By by = (By) method.invoke(null, value);
 			WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
 			return element;
 		} catch (NoSuchMethodException e) {
-			logger.info("ÕÒ²»µ½¶ÔÓ¦·½·¨£¬Çë¼ì²éÄãµÄxmlÅäÖÃ");
+			logger.info("æ‰¾ä¸åˆ°å¯¹åº”æ–¹æ³•ï¼Œè¯·æ£€æŸ¥ä½ çš„xmlé…ç½®");
 			e.printStackTrace();
 		} catch (SecurityException e) {
 			e.printStackTrace();

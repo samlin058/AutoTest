@@ -1,4 +1,4 @@
-package util;
+package Service.UiCore.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,7 +9,7 @@ public class DateUtil {
 	private static SimpleDateFormat ymdhmsFormat = new SimpleDateFormat("yyyyMMdd-hhmmss");
 
 	/**
-	 * ·µ»ØÄêÔÂÈÕ£ºyyyymmdd
+	 * è¿”å›å¹´æœˆæ—¥ï¼šyyyymmdd
 	 * @param date
 	 * @return
 	 */
@@ -18,7 +18,7 @@ public class DateUtil {
 	};
 
 	/**
-	 * ·µ»ØÄêÔÂÈÕ:yyyyMMdd-hhmmss
+	 * è¿”å›å¹´æœˆæ—¥:yyyyMMdd-hhmmss
 	 * @param date
 	 * @return
 	 */
@@ -27,7 +27,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * »ñÈ¡½ñÌìµÄÊ±¼ä£¬¸ñÊ½ÎªyyyyMMdd
+	 * è·å–ä»Šå¤©çš„æ—¶é—´ï¼Œæ ¼å¼ä¸ºyyyyMMdd
 	 * @return
 	 */
 	public static String getTodayYMDString() {
@@ -35,7 +35,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * »ñÈ¡´ËÊ±µÄÊ±¼ä£¬¸ñÊ½ÎªyyyyMMdd-hhmmss
+	 * è·å–æ­¤æ—¶çš„æ—¶é—´ï¼Œæ ¼å¼ä¸ºyyyyMMdd-hhmmss
 	 * @return
 	 */
 	public static String getTodayYmdHmsString() {

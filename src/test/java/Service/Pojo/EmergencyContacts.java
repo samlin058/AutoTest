@@ -1,7 +1,7 @@
 package Service.Pojo;
 
-import Service.Util.variable.ChinneNameHandler;
-import Service.Util.variable.PhoneNumberGeneratorHandler;
+import Service.Util.variable.ChinneNameGenerate;
+import Service.Util.variable.PhoneNumberGenerate;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ public class EmergencyContacts {
     public static List<EmergencyContacts> getEmergencyContactsList() {
         List<EmergencyContacts> emergencyContacts = new ArrayList<>();
         EmergencyContacts emergencyContact = new EmergencyContacts();
-        emergencyContact.setName(ChinneNameHandler.generateName());
+        emergencyContact.setName(ChinneNameGenerate.generateName());
         emergencyContact.setRelationship("亲戚");
-        emergencyContact.setPhoneNumber(PhoneNumberGeneratorHandler.generatePhoneNumber());
+        emergencyContact.setPhoneNumber(PhoneNumberGenerate.generatePhoneNumber());
         emergencyContacts.add(emergencyContact);
         return emergencyContacts;
     }

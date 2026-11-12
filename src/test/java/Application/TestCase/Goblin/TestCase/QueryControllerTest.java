@@ -1,8 +1,8 @@
 package Application.TestCase.Goblin.TestCase;
 
 
-import Data.ApisLayer.Goblin.QueryController;
-import Data.Ro.Goblin.QueryControllerExportCollectionCasesRo;
+import Domain.Apis.Goblin.QueryController;
+import Domain.Ro.Goblin.QueryControllerExportCollectionCasesRo;
 import Service.ApiCore.BaseTestCase;
 import org.testng.annotations.Test;
 

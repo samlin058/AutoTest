@@ -1,16 +1,16 @@
 package Application.TestCase.LoanMarket.TestCase.Zy;
 
-import Data.DBoperation.LoanMarket.CreditInfo;
-import Data.BusinessLayer.LoanMarket.ChannelRoutingConfiguration;
-import Data.BusinessLayer.LoanMarket.ProductCodeGroup;
-import Data.BusinessLayer.LoanMarket.UserInfoAddDataFactory;
-import Data.BusinessLayer.LoanMarket.XYJH5User;
-import Data.ApisLayer.LoanMarket.AssessmentController;
-import Data.ApisLayer.LoanMarket.ContactsController;
-import Data.ApisLayer.LoanMarket.UserInfoController;
-import Data.Ro.LoanMarket.AssessmentControllerInitRo;
-import Data.Ro.LoanMarket.AssessmentControllerStatusRo;
-import Data.Ro.LoanMarket.UserInfoControllerAddRo;
+import Application.DataFactory.LoanMarket.DBoperation.LoanMarket.CreditInfo;
+import Domain.Business.LoanMarket.ChannelRoutingConfiguration;
+import Domain.Business.LoanMarket.ProductCodeGroup;
+import Domain.Business.LoanMarket.UserInfoAddDataFactory;
+import Domain.Business.LoanMarket.XYJH5User;
+import Domain.Apis.LoanMarket.AssessmentController;
+import Domain.Apis.LoanMarket.ContactsController;
+import Domain.Apis.LoanMarket.UserInfoController;
+import Domain.Ro.LoanMarket.AssessmentControllerInitRo;
+import Domain.Ro.LoanMarket.AssessmentControllerStatusRo;
+import Domain.Ro.LoanMarket.UserInfoControllerAddRo;
 import Service.ApiCore.BaseTestCase;
 import Service.Util.Universal.JsonHandler;
 import Service.Util.Universal.PollingHandler;
@@ -19,7 +19,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static Data.Ro.LoanMarket.ContactsControllerSaveContactsRo.generateContactsList;
+import static Domain.Ro.LoanMarket.ContactsControllerSaveContactsRo.generateContactsList;
 
 /**
  * 授信测试

@@ -1,11 +1,11 @@
-package pojo;
+package Service.UiCore.pojo;
 
 public class Locator {
-	// 1.Í¨¹ıÊ²Ã´·½Ê½È¥ÕÒÔªËØ£¨Cssselecter¡¢Xpath¡¢id¡¢name¡¢by("value")£©
+	// 1.é€šè¿‡ä»€ä¹ˆæ–¹å¼å»æ‰¾å…ƒç´ ï¼ˆCssselecterã€Xpathã€idã€nameã€by("value")ï¼‰
 	private String by;
-	// 2.ÔªËØµÄÖµ
+	// 2.å…ƒç´ çš„å€¼
 	private String value;
-	// 3.¼òµ¥µÄÃèÊöÔªËØ£¨¹Ø¼ü×Ö£©
+	// 3.ç®€å•çš„æè¿°å…ƒç´ ï¼ˆå…³é”®å­—ï¼‰
 	private String desc;
 
 	public String getBy() {
@@ -38,7 +38,7 @@ public class Locator {
 		return "Locator[by=" + by + ",value=" + value + ",desc=" + desc + "]";
 	}
 	
-	//locatorµÄµ÷ÓÃºó·½·¨
+	//locatorçš„è°ƒç”¨åæ–¹æ³•
 	public Locator(String by,String value,String desc){
 		super();
 		this.by=by;

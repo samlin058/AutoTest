@@ -1,9 +1,9 @@
 package Application.TestCase.LoanMarket.TestCase.Zy;
 
-import Data.BusinessLayer.LoanMarket.H5ProcessContext;
-import Data.BusinessLayer.LoanMarket.XYJH5Process;
-import Data.ApisLayer.LoanMarket.RepayPlanController;
-import Data.Ro.LoanMarket.RepayPlanControllerPlanCalculateRo;
+import Domain.Business.LoanMarket.H5ProcessContext;
+import Domain.Business.LoanMarket.XYJH5Process;
+import Domain.Apis.LoanMarket.RepayPlanController;
+import Domain.Ro.LoanMarket.RepayPlanControllerPlanCalculateRo;
 import Service.ApiCore.BaseTestCase;
 import Service.Util.Universal.IntegerHandler;
 import Service.Util.Universal.StringHandler;

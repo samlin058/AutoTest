@@ -1,19 +1,17 @@
-package base;
+package Service.UiCore.base;
 
+import Service.UiCore.util.StringUtil;
+import javafx.scene.control.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import base.FindEle;
-import javafx.scene.control.Alert;
-import util.StringUtil;
-
 public class AssertResult extends FindEle {
 
 	/**
-	 * ÑéÖ¤ÔªËØµÄÎÄ±¾ÄÚÈİÓëÆÚÍûÄÚÈİÊÇ·ñÒ»ÖÂ
+	 * éªŒè¯å…ƒç´ çš„æ–‡æœ¬å†…å®¹ä¸æœŸæœ›å†…å®¹æ˜¯å¦ä¸€è‡´
 	 * 
-	 * @param element
+	 *
 	 * @param expectedText
 	 */
 	public void assertElementText(String pageKeyword, String eleKeyword, String expectedText) {
@@ -23,9 +21,9 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔÒ³ÃæÔªËØ°üº¬Ä³ÎÄ±¾
+	 * æ–­è¨€é¡µé¢å…ƒç´ åŒ…å«æŸæ–‡æœ¬
 	 * 
-	 * @param element
+	 *
 	 * @param expectedText
 	 */
 	public void assertPartialTextPresent(String pageKeyword, String eleKeyword, String expectedText) {
@@ -35,9 +33,9 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔÄ³ÔªËØ¿É±à¼­
+	 * æ–­è¨€æŸå…ƒç´ å¯ç¼–è¾‘
 	 * 
-	 * @param element
+	 *
 	 */
 	public void assertElementEditable(String pageKeyword, String eleKeyword) {
 		WebElement element = getElement(pageKeyword, eleKeyword);
@@ -45,9 +43,9 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔÄ³ÔªËØ²»¿É±à¼­
+	 * æ–­è¨€æŸå…ƒç´ ä¸å¯ç¼–è¾‘
 	 * 
-	 * @param element
+	 *
 	 */
 	public void assertElementNotEditable(String pageKeyword, String eleKeyword) {
 		WebElement element = getElement(pageKeyword, eleKeyword);
@@ -55,12 +53,12 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 *  ¶ÏÑÔµ±Ç°url°üº¬value
+	 *  æ–­è¨€å½“å‰urlåŒ…å«value
 	 * @param driver
 	 * @param value void
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public void assertURLContains(WebDriver driver, String value) {
@@ -69,11 +67,11 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔÔªËØµÄtextÎª¿Õ
-	 * @param element void
+	 * æ–­è¨€å…ƒç´ çš„textä¸ºç©º
+	 *
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public void assertTextNotPresent(String pageKeyword, String eleKeyword) {
@@ -84,13 +82,13 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔÔªËØµÄÊôĞÔÖµÊÇ·ñÓëÆÚÍûÖµÏàµÈ
-	 * @param element             ÔªËØ 
-	 * @param attribute           ÊôĞÔkey
-	 * @param expectedValue       ÆÚÍûÖµ 
+	 * æ–­è¨€å…ƒç´ çš„å±æ€§å€¼æ˜¯å¦ä¸æœŸæœ›å€¼ç›¸ç­‰
+	 *
+	 * @param attribute           å±æ€§key
+	 * @param expectedValue       æœŸæœ›å€¼ 
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public void assertElementAttributeValueEquals(String pageKeyword, String eleKeyword, String attribute,
@@ -101,13 +99,13 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔÔªËØµÄÊôĞÔÖµ²»µÈÓÚÆÚÍûÖµ
-	 * @param element           ÔªËØ
-	 * @param attribute         ÊôĞÔkey
-	 * @param expectedValue     ÆÚÍûÖµ
+	 * æ–­è¨€å…ƒç´ çš„å±æ€§å€¼ä¸ç­‰äºæœŸæœ›å€¼
+	 *
+	 * @param attribute         å±æ€§key
+	 * @param expectedValue     æœŸæœ›å€¼
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public void assertElementAttributeValueNotEquals(String pageKeyword, String eleKeyword, String attribute, String expectedValue) {
@@ -117,12 +115,12 @@ public class AssertResult extends FindEle {
 	}
 
 	/**
-	 * ¶ÏÑÔAlertµ¯¿òµÄtext°üº¬ÆÚÍûÖµ
-	 * @param element           ÔªËØ
-	 * @param expectedValue     ÆÚÍûÖµ
+	 * æ–­è¨€Alertå¼¹æ¡†çš„textåŒ…å«æœŸæœ›å€¼
+	 *
+	 * @param expectedValue     æœŸæœ›å€¼
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ29ÈÕ 
+	 * @Date         2020å¹´9æœˆ29æ—¥ 
 	 *
 	 */
 	public void assertAlertTextContains(WebDriver driver, String expectedValue) {

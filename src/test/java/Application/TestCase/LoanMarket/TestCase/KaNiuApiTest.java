@@ -1,26 +1,26 @@
 package Application.TestCase.LoanMarket.TestCase;
 
-import Data.ApisLayer.LoanMarket.TestKaniuController;
-import Data.Ro.LoanMarket.TestKaniuControllerKaNiuUserCheckServiceRo;
-import Data.Ro.LoanMarket.TestKaniuControllerKaNiuUserCreditServiceRo;
-import Service.ApiCore.ProjectEnum;
+import Domain.Apis.LoanMarket.TestKaniuController;
+import Domain.Ro.LoanMarket.TestKaniuControllerKaNiuUserCheckServiceRo;
+import Domain.Ro.LoanMarket.TestKaniuControllerKaNiuUserCreditServiceRo;
+import Service.ProjectEnum;
 import Service.Util.Universal.DateHandler;
 import Service.Util.Universal.JDBCHandler;
 import Service.Util.Universal.JsonHandler;
-import Service.Util.variable.ChinneNameHandler;
-import Service.Util.variable.GenerationHandler;
-import Service.Util.variable.IDNoGeneratorHandler;
-import Service.Util.variable.PhoneNumberGeneratorHandler;
+import Service.Util.variable.ChinneNameGenerate;
+import Service.Util.variable.IntGenerate;
+import Service.Util.variable.IDNoGenerate;
+import Service.Util.variable.PhoneNumberGenerate;
 
 public class KaNiuApiTest {
     TestKaniuController testKaniuController = new TestKaniuController();
 
     public void testIncoming() {
-        String name = ChinneNameHandler.generateName();
-        String phone = PhoneNumberGeneratorHandler.generatePhoneNumber();
-        String idNo = IDNoGeneratorHandler.generateIDCard(22, 50);
-        String userId = "KN" + GenerationHandler.generateRandomInteger(5, 7);
-        String orderId = "KN" + DateHandler.getTodayYMDString() + GenerationHandler.generateRandomInteger(3, 5);
+        String name = ChinneNameGenerate.generateName();
+        String phone = PhoneNumberGenerate.generatePhoneNumber();
+        String idNo = IDNoGenerate.generateIDCard(22, 50);
+        String userId = "KN" + IntGenerate.generateRandomInteger(5, 7);
+        String orderId = "KN" + DateHandler.getTodayYMDString() + IntGenerate.generateRandomInteger(3, 5);
         String loanId = "KN" + DateHandler.getTimestamp();
         // 撞库
         String checkResult = testKaniuController.kaNiuUserCheckService(TestKaniuControllerKaNiuUserCheckServiceRo.changeRequestRo(phone, idNo, name));

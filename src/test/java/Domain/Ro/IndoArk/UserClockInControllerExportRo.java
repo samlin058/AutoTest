@@ -1,0 +1,31 @@
+package Domain.Ro.IndoArk;
+
+import Domain.Apis.IndoArk.UserClockInController;
+import Service.Annotations.AnnotationProcessor.DenpendencesProcessor;
+import Service.Annotations.AnnotationLibrary.Param;
+
+
+@lombok.Data
+public class UserClockInControllerExportRo extends UserClockInController {
+
+    @Param
+    public String checkInTimeStart;
+    @Param
+    public String checkInTimeEnd;
+    @Param
+    public Number clockInDurationStart;
+    @Param
+    public Number clockInDurationEnd;
+    @Param
+    public String[] userIds;
+    @Param
+    public Number current;
+    @Param
+    public Number pageSize;
+
+   static {
+      DenpendencesProcessor.roDendenpence(UserClockInControllerExportRo.class);
+   }
+}
+
+

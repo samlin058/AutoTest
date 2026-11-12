@@ -1,9 +1,9 @@
 package Application.TestCase.Alchemist.TestCase;
 
 
-import Data.ApisLayer.Alchemist.LeadController;
-import Data.Ro.Alchemist.LeadControllerCreateShortLinkRo;
-import Data.Ro.Alchemist.getApplicationStatuesRo;
+import Domain.Apis.Alchemist.LeadController;
+import Domain.Ro.Alchemist.LeadControllerCreateShortLinkRo;
+import Domain.Ro.Alchemist.getApplicationStatuesRo;
 import Service.ApiCore.BaseTestCase;
 import Service.ApiCore.TestScenarioEnum;
 import org.testng.annotations.DataProvider;

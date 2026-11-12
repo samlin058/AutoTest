@@ -1,9 +1,9 @@
 package Application.TestCase.LoanMarket.TestCase.Zy;
 
-import Data.BusinessLayer.LoanMarket.H5ProcessContext;
-import Data.BusinessLayer.LoanMarket.XYJH5Process;
-import Data.ApisLayer.LoanMarket.RepayPlanController;
-import Data.Ro.LoanMarket.RepayPlanControllerPaymentRo;
+import Domain.Business.LoanMarket.H5ProcessContext;
+import Domain.Business.LoanMarket.XYJH5Process;
+import Domain.Apis.LoanMarket.RepayPlanController;
+import Domain.Ro.LoanMarket.RepayPlanControllerPaymentRo;
 import Service.ApiCore.BaseTestCase;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

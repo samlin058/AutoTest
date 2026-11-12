@@ -1,13 +1,12 @@
-package listener;
-
-import java.io.File;
+package Service.UiCore.listener;
 
 import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
+import Service.UiCore.util.DateUtil;
+import Service.UiCore.util.ScreenShotUitl;
 
-import util.DateUtil;
-import util.ScreenShotUitl;
+import java.io.File;
 
 public class TestFailureListener extends TestListenerAdapter {
 
@@ -15,26 +14,26 @@ public class TestFailureListener extends TestListenerAdapter {
 	public void onTestFailure(ITestResult tr) {
 		// TODO Auto-generated method stub
 		super.onTestFailure(tr);
-		// 1¡¢Í¨¹ıtestµÄÉÏÏÂÎÄµÃµ½surefire-reportsÕâ¸ö¸ùÄ¿Â¼
+		// 1ã€é€šè¿‡testçš„ä¸Šä¸‹æ–‡å¾—åˆ°surefire-reportsè¿™ä¸ªæ ¹ç›®å½•
 		String outputDir = tr.getTestContext().getOutputDirectory();
-		// ½ØÈ¡³ösurefire-reports¸ùÄ¿Â¼
+		// æˆªå–å‡ºsurefire-reportsæ ¹ç›®å½•
 		String surefireDir = outputDir.substring(0, outputDir.lastIndexOf("\\"));
-		// 2¡¢´ÓÉÏÏÂÎÄÄÃµ½testµÄname
+		// 2ã€ä»ä¸Šä¸‹æ–‡æ‹¿åˆ°testçš„name
 		String testName = tr.getTestContext().getCurrentXmlTest().getName();
-		// Ä¿Â¼×é×°
+		// ç›®å½•ç»„è£…
 		String dateStr = DateUtil.getTodayYMDString();
 		String screenShotDir = surefireDir + File.separator + "screenshot" + File.separator + dateStr + testName;
-		// ½ØÍ¼²¢·µ»ØÍ¼Æ¬file
+		// æˆªå›¾å¹¶è¿”å›å›¾ç‰‡file
 		File screenshotFile = ScreenShotUitl.takeScreenshot(screenShotDir);
-		// ±¾µØÍ¼Æ¬µÄ¾ø¶ÔÂ·¾¶
+		// æœ¬åœ°å›¾ç‰‡çš„ç»å¯¹è·¯å¾„
 		String absolutePath = screenshotFile.getAbsolutePath();
-		// ×é×°url
+		// ç»„è£…url
 		String oldStr = absolutePath.substring(0, absolutePath.indexOf("screenshot"));
 		String newStr = "http://localhost:8887/";
 		String urlTemp = absolutePath.replace(oldStr, newStr);
 		String imgUrl = urlTemp.replace("\\", "/");
-		// ½«url·ÅÈëÈÕÖ¾ÖĞ
-		Reporter.log("<img src ='" + imgUrl + "' hight='100' width='100'><a href ='" + imgUrl + "' target='_blank'>µã»÷²é¿´´óÍ¼</a></img>");
+		// å°†urlæ”¾å…¥æ—¥å¿—ä¸­
+		Reporter.log("<img src ='" + imgUrl + "' hight='100' width='100'><a href ='" + imgUrl + "' target='_blank'>ç‚¹å‡»æŸ¥çœ‹å¤§å›¾</a></img>");
 	}
 
 }

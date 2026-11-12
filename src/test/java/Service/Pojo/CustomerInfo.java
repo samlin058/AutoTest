@@ -1,7 +1,7 @@
 package Service.Pojo;
 
 import Service.Util.Universal.DateHandler;
-import Service.Util.variable.PhoneNumberGeneratorHandler;
+import Service.Util.variable.PhoneNumberGenerate;
 import lombok.Data;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +40,7 @@ public class CustomerInfo {
 
     public CustomerInfo() {
         this.name = generateRandomName();
-        this.phoneNumber = PhoneNumberGeneratorHandler.generatePhoneNumber();  // 随机手机号
+        this.phoneNumber = PhoneNumberGenerate.generatePhoneNumber();  // 随机手机号
         this.ethnicity = generateRandomEthnicity(); // 随机民族
         this.idCardStartDate = DateHandler.getTodayY_M_DString(); // 当前日期
         this.idCardEndDate = DateHandler.nextSomeMonth(idCardStartDate, 120); // 默认有效期10年

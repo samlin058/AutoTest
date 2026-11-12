@@ -1,17 +1,17 @@
-package base;
+package Service.UiCore.base;
 
 import org.apache.log4j.Logger;
 
-import util.PropertiesUtil;
+import Service.UiCore.util.PropertiesUtil;
 
 public class OperateOnDriver extends InitDriver {
 
 	private static Logger logger = Logger.getLogger(OperateOnDriver.class);
 
 	/**
-	 * ä¯ÀÀÆ÷´°¿Ú×î´ó»¯&µ½Ä³¸öÒ³ÃæÈ¥
+	 * æµè§ˆå™¨çª—å£æœ€å¤§åŒ–&åˆ°æŸä¸ªé¡µé¢å»
 	 * 
-	 * @param urlKey  (propertiesÅäÖÃ)
+	 * @param urlKey  (propertiesé…ç½®)
 	 */
 	public static void maxAndTo(String urlKey) {
 		maximize();
@@ -19,58 +19,58 @@ public class OperateOnDriver extends InitDriver {
 	}
 
 	/**
-	 * µ½Ä³¸öÒ³ÃæÈ¥
+	 * åˆ°æŸä¸ªé¡µé¢å»
 	 * 
-	 * @param urlKey(propertiesÅäÖÃ)
+	 * @param urlKey(propertiesé…ç½®)
 	 */
 	public static void to(String urlKey) {
 		String url = PropertiesUtil.urlProperties.getProperty(urlKey);
-		logger.info("´ò¿ª²âÊÔÒ³ÃæµØÖ·£º" + url);
+		logger.info("æ‰“å¼€æµ‹è¯•é¡µé¢åœ°å€ï¼š" + url);
 		driver.get(url);
 	}
 
 	/**
-	 * debugÓÃ
+	 * debugç”¨
 	 * 
 	 * @author luandao
-	 * @Date 2020Äê9ÔÂ5ÈÕ
+	 * @Date 2020å¹´9æœˆ5æ—¥
 	 *
 	 */
 	public static void debugTo(String url) {
 		maximize();
-		logger.info("´ò¿ª²âÊÔÒ³ÃæµØÖ·£º" + url);
+		logger.info("æ‰“å¼€æµ‹è¯•é¡µé¢åœ°å€ï¼š" + url);
 		driver.get(url);
 	}
 
 	/**
-	 * ä¯ÀÀÆ÷´°¿Ú×î´ó»¯
+	 * æµè§ˆå™¨çª—å£æœ€å¤§åŒ–
 	 */
 	public static void maximize() {
-		logger.info("ä¯ÀÀÆ÷´°¿Ú×î´ó»¯");
+		logger.info("æµè§ˆå™¨çª—å£æœ€å¤§åŒ–");
 		driver.manage().window().maximize();
 	}
 
 	/**
-	 * Ç°½øµ½ÏÂÒ»¸öÒ³Ãæ
+	 * å‰è¿›åˆ°ä¸‹ä¸€ä¸ªé¡µé¢
 	 */
 	public static void forward() {
-		logger.info("Ç°ÍùÏÂÒ»¸öÒ³Ãæ");
+		logger.info("å‰å¾€ä¸‹ä¸€ä¸ªé¡µé¢");
 		driver.navigate().forward();
 	}
 
 	/**
-	 * ºóÍËµ½ÉÏÒ»¸öÒ³Ãæ
+	 * åé€€åˆ°ä¸Šä¸€ä¸ªé¡µé¢
 	 */
 	public static void back() {
-		logger.info("·µ»ØÉÏÒ»¸öÒ³Ãæ");
+		logger.info("è¿”å›ä¸Šä¸€ä¸ªé¡µé¢");
 		driver.navigate().back();
 	}
 
 	/**
-	 * Ë¢ĞÂµ±Ç°Ò³Ãæ
+	 * åˆ·æ–°å½“å‰é¡µé¢
 	 */
 	public static void refresh() {
-		logger.info("Ë¢ĞÂÒ³Ãæ");
+		logger.info("åˆ·æ–°é¡µé¢");
 		driver.navigate().refresh();
 	}
 }

@@ -1,6 +1,6 @@
-package Data.Ro.${packageName};
+package Domain.Ro.${packageName};
 
-import Data.ApisLayer.${packageName}.${ControllerName};
+import Domain.Apis.${packageName}.${ControllerName};
 import Service.Annotations.AnnotationProcessor.DenpendencesProcessor;
 import Service.Annotations.AnnotationLibrary.FileBody;
 import com.alibaba.fastjson.JSONObject;
@@ -13,7 +13,7 @@ import Service.Annotations.AnnotationLibrary.PathParam;
 import java.util.List;
 
 <#if isJsonArray?has_content && isJsonArray =="true" >@JsonArray</#if>
-@lombok.Data
+@lombok.Domain
 public class ${roFileName} extends ${ControllerName} {
 
    static {

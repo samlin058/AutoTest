@@ -1,7 +1,7 @@
 package Service.Pojo;
 
 import Service.Util.Universal.DateHandler;
-import Service.Util.variable.GenerationHandler;
+import Service.Util.variable.IntGenerate;
 
 import java.util.Date;
 
@@ -47,7 +47,7 @@ public class LoanInfo {
             throw new RuntimeException("借款产品的期限不能大于12小于0");
         } else {
             this.loanTerm = loanTerm;
-            this.loanAmount = GenerationHandler.generateRandomInt(100, 999) * loanTerm;
+            this.loanAmount = IntGenerate.generateRandomInt(100, 999) * loanTerm;
             this.loanInterestRate = 12;
             this.disbursementDate = DateHandler.generateRandomDateString();
             this.overduePeriods = loanTerm;

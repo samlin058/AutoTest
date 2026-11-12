@@ -1,10 +1,10 @@
 package Application.TestCase.LoanMarket.TestCase.Zy;
 
-import Data.BusinessLayer.LoanMarket.H5ProcessContext;
-import Data.BusinessLayer.LoanMarket.XYJH5Process;
-import Data.ApisLayer.LoanMarket.OrderController;
-import Data.Enum.LoanMarket.LoanUsageEnum;
-import Data.Ro.LoanMarket.OrderControllerCreateRo;
+import Domain.Business.LoanMarket.H5ProcessContext;
+import Domain.Business.LoanMarket.XYJH5Process;
+import Domain.Apis.LoanMarket.OrderController;
+import Domain.Enum.LoanMarket.LoanUsageEnum;
+import Domain.Ro.LoanMarket.OrderControllerCreateRo;
 import Service.ApiCore.BaseTestCase;
 import Service.Util.Universal.IntegerHandler;
 import org.testng.annotations.DataProvider;

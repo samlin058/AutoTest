@@ -1,4 +1,4 @@
-package util;
+package Service.UiCore.util;
 
 import java.util.Properties;
 
@@ -11,10 +11,10 @@ public class PropertiesUtil {
 	}
 
 	/**
-	 * ¼ÓÔØÊôĞÔÎÄ¼ş
+	 * åŠ è½½å±æ€§æ–‡ä»¶
 	 *
 	 * @author       luandao
-	 * @Date         2020Äê9ÔÂ30ÈÕ 
+	 * @Date         2020å¹´9æœˆ30æ—¥ 
 	 *
 	 */
 	private static void loadProperties() {

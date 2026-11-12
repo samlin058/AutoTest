@@ -12,7 +12,7 @@
 			<class name="Application.TestCase.Alchemist.TestCase.FileControllerTest" />
 			<class name="Application.TestCase.Alchemist.TestCase.LeadControllerTest" />
 			<class name="Application.TestCase.Goblin.TestCase.QueryControllerTest" />
-			<class name="Data.BusinessLayer.BlackShark.ProjectManagement" />
+			<class name="Domain.Business.BlackShark.ProjectManagement" />
 			<class name="Application.TestCase.Alchemist.TestCase.FileControllerTest" />
             <class name="Application.TestCase.Alchemist.TestCase.LeadControllerTest" />
 		</classes>

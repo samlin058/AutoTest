@@ -1,7 +1,7 @@
 package Service.Pojo;
 
 import Service.Util.Universal.MD5Handler;
-import Service.Util.variable.PhoneNumberGeneratorHandler;
+import Service.Util.variable.PhoneNumberGenerate;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class AlchemistT3EexcelTemplate {
         List<AlchemistT3EexcelTemplate> phoneList = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             AlchemistT3EexcelTemplate phone  = new AlchemistT3EexcelTemplate();
-            phone.setPhoneMd5(MD5Handler.getMD5(PhoneNumberGeneratorHandler.generatePhoneNumber()));
+            phone.setPhoneMd5(MD5Handler.getMD5(PhoneNumberGenerate.generatePhoneNumber()));
             phoneList.add(phone);
         }
         return  phoneList;

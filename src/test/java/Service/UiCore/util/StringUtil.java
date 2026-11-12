@@ -1,4 +1,4 @@
-package util;
+package Service.UiCore.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class StringUtil {
 	/**
-	 * ÅĞ¶Ï×Ö·û´®ÊÇ·ñÎª¿Õ
-	 * 1¡¢µÈÓÚnull
-	 * 2¡¢"   "µÈÓÚ¿Õ
-	 * 3¡¢""µÈÓÚ¿Õ
-	 * @param str  ×Ö·û´®
+	 * åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦ä¸ºç©º
+	 * 1ã€ç­‰äºnull
+	 * 2ã€"   "ç­‰äºç©º
+	 * 3ã€""ç­‰äºç©º
+	 * @param str  å­—ç¬¦ä¸²
 	 * @return
 	 */
 	public static boolean isEmpty(String str) {
@@ -20,19 +20,19 @@ public class StringUtil {
 	}
 
 	/**
-	 *    ·Ö½âÆÚÍûjsonKeyµÄÖµ
+	 *    åˆ†è§£æœŸæœ›jsonKeyçš„å€¼
 	 * @param keyStr 
 	 * @return
 	 */
 	public static List<Map<String, String>> analysisHopeStr(String keyStr) {
 		List<Map<String, String>> resultList= new ArrayList<>();
-		//´´½¨´æ·Å½á¹û¶ÔÏó
+		//åˆ›å»ºå­˜æ”¾ç»“æœå¯¹è±¡
 		HashMap<String, String> resultMap = new HashMap<String, String>();
-		//´´½¨´æ·ÅkeyµÄlist¶ÔÏó
+		//åˆ›å»ºå­˜æ”¾keyçš„listå¯¹è±¡
 		List<String> keyList = new ArrayList<String>();
-		//´´½¨´æ·ÅvalueµÄlist¶ÔÏó
+		//åˆ›å»ºå­˜æ”¾valueçš„listå¯¹è±¡
 		List<String> valueList = new ArrayList<String>();
-		// ·Ö½âkeyºÍvalue
+		// åˆ†è§£keyå’Œvalue
 		String[] oneList = keyStr.split(",");
 		for (int i = 0; i < oneList.length; i++) {
 			if (i % 2 == 0) {
@@ -41,7 +41,7 @@ public class StringUtil {
 				valueList.add(oneList[i].toString());
 			}
 		}
-		//½«·Ö½âµÄÖµ´æÈëmap¶ÔÏó
+		//å°†åˆ†è§£çš„å€¼å­˜å…¥mapå¯¹è±¡
 		int forNum = oneList.length / 2;
 		for (int j = 0; j < forNum; j++) {
 			String key = keyList.get(j);
@@ -53,7 +53,7 @@ public class StringUtil {
 	}
 	
     /*
-     * ÑİÊ¾£º½«ÌØÊâµÄ×Ö·û´®½âÎöÎªmapÊı×é	
+     * æ¼”ç¤ºï¼šå°†ç‰¹æ®Šçš„å­—ç¬¦ä¸²è§£æä¸ºmapæ•°ç»„	
      */
 	public static void main(String[] args) {
 		String test = "data,0,banner,0";

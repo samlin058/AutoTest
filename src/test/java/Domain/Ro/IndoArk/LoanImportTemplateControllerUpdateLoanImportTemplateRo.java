@@ -1,0 +1,20 @@
+package Domain.Ro.IndoArk;
+
+import Domain.Apis.IndoArk.LoanImportTemplateController;
+import Service.Annotations.AnnotationLibrary.Param;
+import Service.Annotations.AnnotationProcessor.DenpendencesProcessor;
+
+
+@lombok.Data
+public class LoanImportTemplateControllerUpdateLoanImportTemplateRo extends LoanImportTemplateController {
+
+    @Param
+    public Integer id;
+
+
+   static {
+      DenpendencesProcessor.roDendenpence(LoanImportTemplateControllerUpdateLoanImportTemplateRo.class);
+   }
+}
+
+

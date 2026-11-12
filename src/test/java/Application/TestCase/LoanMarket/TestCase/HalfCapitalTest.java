@@ -1,11 +1,11 @@
 package Application.TestCase.LoanMarket.TestCase;
 
-import Data.DBoperation.LoanMarket.CreditInfo;
-import Data.DBoperation.LoanMarket.Partner;
-import Data.BusinessLayer.LoanMarket.H5ProcessContext;
-import Data.BusinessLayer.LoanMarket.XYJH5Process;
-import Data.ApisLayer.LoanMarket.AgreementController;
-import Data.Ro.LoanMarket.AgreementControllerGetRo;
+import Application.DataFactory.LoanMarket.DBoperation.LoanMarket.CreditInfo;
+import Application.DataFactory.LoanMarket.DBoperation.LoanMarket.Partner;
+import Domain.Business.LoanMarket.H5ProcessContext;
+import Domain.Business.LoanMarket.XYJH5Process;
+import Domain.Apis.LoanMarket.AgreementController;
+import Domain.Ro.LoanMarket.AgreementControllerGetRo;
 import Service.ApiCore.BaseTestCase;
 import Service.Util.Universal.JsonHandler;
 import Service.Util.Universal.StringHandler;
